@@ -30,6 +30,7 @@ const Form = styled.form<{ loadingProps: boolean }>`
   width: 100%;
   height: 60px;
   background-color: #ffc96592;
+  border-top: 1px solid #a1a1a185;
 
   display: flex;
   justify-content: center;
