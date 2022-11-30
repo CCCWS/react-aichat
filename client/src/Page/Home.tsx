@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Configuration, OpenAIApi } from "openai";
+import axios from "axios";
 
 import "./Home.css";
 import InputFooter from "../Components/InputFooter";
@@ -73,6 +74,10 @@ const Home = () => {
     }
   };
 
+  const test = async () => {
+    const res = await axios.get("/api/test/test");
+  };
+
   return (
     <>
       <HomeDiv>
@@ -87,6 +92,9 @@ const Home = () => {
           </TodayDate>
 
           <ChatMessage chatHistory={chatHistory} loading={loading} />
+          <button type="button" onClick={test}>
+            test
+          </button>
         </Chat>
 
         <InputFooter
