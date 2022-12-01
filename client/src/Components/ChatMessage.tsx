@@ -14,26 +14,30 @@ const ChatMessage = ({ chatHistory, loading }: ChatMessageProps) => {
   return (
     <>
       {chatHistory.length === 0 ? null : (
-        <TransitionGroup>
-          {chatHistory.map((data, index) => (
-            <CSSTransition key={index} timeout={500} classNames="fade">
-              <Message type={data.type}>
-                <MessageTime>
-                  {new Intl.DateTimeFormat("kr", {
-                    timeStyle: "short",
-                  }).format(new Date())}
-                </MessageTime>
+        <>
+          <TransitionGroup>
+            {chatHistory.map((data, index) => (
+              <CSSTransition key={index} timeout={500} classNames="fade">
+                <Message type={data.type}>
+                  <MessageTime>
+                    {new Intl.DateTimeFormat("kr", {
+                      timeStyle: "short",
+                    }).format(new Date())}
+                  </MessageTime>
 
-                <MessageContent type={data.type}>
-                  {data.type === "response" && <div>알파고</div>}
-                  <div>{data.message}</div>
-                </MessageContent>
-                {data.type === "response" && <Image image={`url(${image1})`} />}
-              </Message>
-            </CSSTransition>
-          ))}
+                  <MessageContent type={data.type}>
+                    {data.type === "response" && <div>알파고</div>}
+                    <div>{data.message}</div>
+                  </MessageContent>
+                  {data.type === "response" && (
+                    <Image image={`url(${image1})`} />
+                  )}
+                </Message>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
           <Waiting loadingProps={loading}>...</Waiting>
-        </TransitionGroup>
+        </>
       )}
     </>
   );
@@ -71,9 +75,7 @@ const MessageContent = styled.div<{ type: string }>`
     border-radius: 10px;
 
     line-height: 30px;
-    /* word-wrap: break-word; */
-    /* word-break: break-all; */
-    /* word-wrap: break-word; */
+    word-wrap: break-word;
     white-space: pre-wrap;
   }
 `;
