@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Configuration, OpenAIApi } from "openai";
-import axios from "axios";
 
 import "./Home.css";
 import InputFooter from "../Components/InputFooter";
 import ChatMessage from "../Components/ChatMessage";
 import Landing from "../Components/Landing";
+
+import useTranslate from "../hooks/useTranslate";
+import useAi from "../hooks/useAi";
 
 interface chatHistory {
   message: string;
@@ -20,12 +22,18 @@ const Home = () => {
   const [scroll, setScroll] = useState<boolean>(false);
   const scrollRef = useRef<any>();
 
-  const configuration = new Configuration({
-    apiKey: "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",
-  });
+  const { result: krToEn, papagoApi: krTranslate } = useTranslate();
+  // const { result: enToKr, papagoApi: enTranslate } = useTranslate();
 
-  const openai = new OpenAIApi(configuration);
+  const { response, onSendMessageAi } = useAi();
 
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!loading) {
+      setInputValue(e.target.value);
+    }
+  };
+
+  //새로운 메세지 전송, 받을때 스크롤 가장 아래로
   useEffect(() => {
     setScroll(!scroll);
   }, [chatHistory]);
@@ -40,43 +48,30 @@ const Home = () => {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-
-    if (inputValue.length === 0) return;
-    if (loading) return;
-
     setLoading(true);
 
+    if (inputValue.length === 0) return;
+
+    krTranslate("ko", "en", inputValue);
     setChatHistory((prev) => [...prev, { message: inputValue, type: "send" }]);
     setInputValue("");
-
-    openai
-      .createCompletion({
-        model: "text-davinci-003",
-        prompt: inputValue,
-        temperature: 0.7,
-        max_tokens: 256,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      })
-      .then((res: any) => {
-        setChatHistory((prev) => [
-          ...prev,
-          { message: res.data.choices[0].text, type: "response" },
-        ]);
-        setLoading(false);
-      });
   };
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!loading) {
-      setInputValue(e.target.value);
+  useEffect(() => {
+    if (krToEn.length !== 0) {
+      onSendMessageAi(krToEn);
     }
-  };
+  }, [krToEn, onSendMessageAi]);
 
-  const test = async () => {
-    const res = await axios.get("/api/test/test");
-  };
+  useEffect(() => {
+    if (response.length !== 0) {
+      setChatHistory((prev) => [
+        ...prev,
+        { message: response, type: "response" },
+      ]);
+      setLoading(false);
+    }
+  }, [response]);
 
   return (
     <>
@@ -92,9 +87,7 @@ const Home = () => {
           </TodayDate>
 
           <ChatMessage chatHistory={chatHistory} loading={loading} />
-          <button type="button" onClick={test}>
-            test
-          </button>
+          {/* <button onClick={test}>test</button> */}
         </Chat>
 
         <InputFooter

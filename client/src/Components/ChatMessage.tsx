@@ -60,16 +60,21 @@ const MessageTime = styled.div`
 const MessageContent = styled.div<{ type: string }>`
   max-width: 60%;
   & > :last-child {
+    margin-top: 10px;
     background-color: ${(props) => props.type === "send" && " #bdbdbdad"};
     background-color: ${(props) => props.type === "response" && "#ffffffac"};
     border: 2px solid gray;
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     padding-left: 0.8rem;
     padding-right: 0.8rem;
     border-radius: 10px;
 
-    word-wrap: break-word;
+    line-height: 30px;
+    /* word-wrap: break-word; */
+    /* word-break: break-all; */
+    /* word-wrap: break-word; */
+    white-space: pre-wrap;
   }
 `;
 
