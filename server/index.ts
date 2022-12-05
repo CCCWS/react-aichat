@@ -1,7 +1,6 @@
-import express, { request, response, NextFunction } from "express";
+import express from "express";
 import papago from "./papago";
 import path from "path";
-import http from "http";
 
 const app = express();
 const port = 3001;
