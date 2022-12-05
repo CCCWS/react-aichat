@@ -4,8 +4,8 @@ import request from "request";
 
 const router: Router = express.Router();
 
-var client_id = "bpBPkihLRlHqafU3igJe";
-var client_secret = "vo2ISK99jV";
+var client_id = "_lXQAvuTjq_l0PT8yBcA";
+var client_secret = "E_eU2E8D34";
 
 router.post("/translate", function (req: Request, res: Response) {
   var api_url = "https://openapi.naver.com/v1/papago/n2mt";

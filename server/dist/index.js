@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const testRouter_1 = __importDefault(require("./testRouter"));
+const papago_1 = __importDefault(require("./papago"));
 const app = (0, express_1.default)();
 const port = 3001;
 app.use(express_1.default.json());
-app.use("/api/test", testRouter_1.default);
+app.use("/api/papago", papago_1.default);
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });

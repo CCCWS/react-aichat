@@ -73,6 +73,8 @@ const Home = () => {
     }
   }, [response]);
 
+  console.log(process.env.NODE_ENV);
+
   return (
     <>
       <HomeDiv>
