@@ -13,14 +13,16 @@ app.use(express_1.default.static(path_1.default.join(__dirname, "build")));
 app.use("/api/papago", papago_1.default);
 if (process.env.NODE_ENV === "production") {
     app.get("/*", (req, res) => {
+        app.use(express_1.default.static("client/build"));
         res.set({
             "Cache-Control": "no-cache, no-store, must-revalidate",
             Pragma: "no-cache",
             Date: Date.now(),
         });
-        res.sendFile(path_1.default.join(__dirname, "build", "index.html"));
+        res.sendFile(path_1.default.join(__dirname, "../client", "build", "index.html"));
     });
 }
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
+    console.log(process.env.NODE_ENV);
 });
