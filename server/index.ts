@@ -16,7 +16,7 @@ app.get("*", (req, res) => {
   //   Pragma: "no-cache",
   //   Date: Date.now(),
   // });
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  path.resolve(__dirname + "/../client/build/index.html");
 });
 
 app.listen(port, () => {

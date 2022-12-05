@@ -18,7 +18,7 @@ app.get("*", (req, res) => {
     //   Pragma: "no-cache",
     //   Date: Date.now(),
     // });
-    res.sendFile(path_1.default.resolve(__dirname, "client", "build", "index.html"));
+    path_1.default.resolve(__dirname + "/../client/build/index.html");
 });
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
