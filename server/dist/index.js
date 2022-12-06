@@ -10,12 +10,9 @@ const app = (0, express_1.default)();
 const port = 3001;
 app.use(express_1.default.json());
 app.use("/api/papago", papago_1.default);
-app.use(express_1.default.static(path_1.default.join(__dirname, "../client/build")));
-app.get("/", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../../client/build/index.html"));
-});
+app.use(express_1.default.static(path_1.default.join(__dirname, "../../client/build")));
 app.get("*", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../../client/build/index.html"));
+    res.sendFile(path_1.default.resolve(__dirname, "../../client", "build", "index.html"));
 });
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
