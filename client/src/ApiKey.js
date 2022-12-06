@@ -1,1 +1,1 @@
-export const Ai_ApiKey = "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";
+export const Ai_ApiKey = "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";
