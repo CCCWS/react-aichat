@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Configuration, OpenAIApi } from "openai";
 
-import { Ai_ApiKey } from "../ApiKey.js";
 import useTranslate from "./useTranslate";
 
 const useAi = () => {
@@ -12,7 +11,7 @@ const useAi = () => {
   const onSendMessageAi = useCallback(
     (value: string) => {
       const configuration = new Configuration({
-        apiKey: Ai_ApiKey,
+        apiKey: "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",
       });
       const openai = new OpenAIApi(configuration);
 
