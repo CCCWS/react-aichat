@@ -11,7 +11,7 @@ const useAi = () => {
   const onSendMessageAi = useCallback(
     (value: string) => {
       const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: "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",
       });
       const openai = new OpenAIApi(configuration);
 
