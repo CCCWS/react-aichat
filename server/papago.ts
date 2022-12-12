@@ -1,15 +1,11 @@
 import express, { Request, Response, Router } from "express";
 import request from "request";
-// import { Papago_client_id, Papago_client_secret } from "./ApiKey.js";
 
 const router: Router = express.Router();
 
-var client_id = "_lXQAvuTjq_l0PT8yBcA";
-var client_secret = "E_eU2E8D34";
-
 router.post("/translate", function (req: Request, res: Response) {
-  var api_url = "https://openapi.naver.com/v1/papago/n2mt";
-  var options = {
+  const api_url = "https://openapi.naver.com/v1/papago/n2mt";
+  const options = {
     url: api_url,
     form: {
       source: req.body.source,
@@ -17,8 +13,8 @@ router.post("/translate", function (req: Request, res: Response) {
       text: req.body.value,
     },
     headers: {
-      "X-Naver-Client-Id": client_id,
-      "X-Naver-Client-Secret": client_secret,
+      "X-Naver-Client-Id": req.body.clientId,
+      "X-Naver-Client-Secret": req.body.clientSecret,
     },
   };
   request.post(options, function (error: any, response: any, body: any) {
