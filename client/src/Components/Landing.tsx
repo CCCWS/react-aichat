@@ -29,6 +29,9 @@ const Div = styled.div<{ view: boolean }>`
   transition: all ease 0.5s;
   transform: ${(props) =>
     props.view ? "translateY(0%)" : "translateY(-100%)"};
+
+  opacity: ${(props) => (props.view ? "1" : "0")};
+  z-index: 99;
 `;
 
 const DivImg = styled.div<{ image: string }>`

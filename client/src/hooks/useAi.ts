@@ -11,10 +11,11 @@ const useAi = () => {
   const { result: enToKr, papagoApi: enTranslate } = useTranslate();
 
   const onSendMessageAi = useCallback(
-    (value: string) => {
+    (value: string, langType: "ko" | "en") => {
       const configuration = new Configuration({
         apiKey: Ai_ApiKey,
       });
+
       const openai = new OpenAIApi(configuration);
 
       openai
@@ -28,7 +29,13 @@ const useAi = () => {
           presence_penalty: 0,
         })
         .then((res: any) => {
-          enTranslate("en", "ko", res.data.choices[0].text);
+          if (langType === "ko") {
+            enTranslate("en", "ko", res.data.choices[0].text);
+          }
+
+          if (langType === "en") {
+            setResponse(res.data.choices[0].text);
+          }
         });
     },
     [enTranslate]

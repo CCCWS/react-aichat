@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 
 import { Papago_client_id, Papago_client_secret } from "../ApiKey";

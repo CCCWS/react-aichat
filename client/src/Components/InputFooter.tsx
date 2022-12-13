@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
 interface InputFooterProps {
@@ -10,6 +10,7 @@ interface InputFooterProps {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   inputValue: string;
   loading: boolean;
+  langType: "ko" | "en";
 }
 
 const InputFooter = ({
@@ -17,10 +18,22 @@ const InputFooter = ({
   inputValue,
   onInputChange,
   loading,
+  langType,
 }: InputFooterProps) => {
+  const [type, setType] = useState<string>("");
+
+  useEffect(() => {
+    if (langType === "ko") setType("한글을 입력해주세요.");
+    if (langType === "en") setType("Please enter English.");
+  }, [langType]);
+
   return (
     <Form onSubmit={onSendMessage} loadingProps={loading}>
-      <input value={inputValue} onChange={onInputChange}></input>
+      <input
+        placeholder={type}
+        value={inputValue}
+        onChange={onInputChange}
+      ></input>
       <button onClick={onSendMessage}>전송</button>
     </Form>
   );

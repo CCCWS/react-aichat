@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { Configuration, OpenAIApi } from "openai";
 
 import "./Home.css";
 import InputFooter from "../Components/InputFooter";
 import ChatMessage from "../Components/ChatMessage";
 import Landing from "../Components/Landing";
+import TypeSelect from "../Components/TypeSelect";
 
 import useTranslate from "../hooks/useTranslate";
 import useAi from "../hooks/useAi";
@@ -20,10 +20,10 @@ const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [scroll, setScroll] = useState<boolean>(false);
+  const [langType, setLangType] = useState<"ko" | "en">("ko");
   const scrollRef = useRef<any>();
 
   const { result: krToEn, papagoApi: krTranslate } = useTranslate();
-  // const { result: enToKr, papagoApi: enTranslate } = useTranslate();
 
   const { response, onSendMessageAi } = useAi();
 
@@ -52,16 +52,26 @@ const Home = () => {
 
     if (inputValue.length === 0) return;
 
-    krTranslate("ko", "en", inputValue);
+    //한국어 사용시 번역
+    if (langType === "ko") {
+      krTranslate("ko", "en", inputValue);
+    }
+
+    //영어 사용시 번역을 하지않고 바로 문장 전달
+    if (langType === "en") {
+      onSendMessageAi(inputValue, langType);
+    }
+
     setChatHistory((prev) => [...prev, { message: inputValue, type: "send" }]);
     setInputValue("");
   };
 
+  //한국어 사용시 번역을한 문장을 전달
   useEffect(() => {
     if (krToEn.length !== 0) {
-      onSendMessageAi(krToEn);
+      onSendMessageAi(krToEn, langType);
     }
-  }, [krToEn, onSendMessageAi]);
+  }, [krToEn, langType, onSendMessageAi]);
 
   useEffect(() => {
     if (response.length !== 0) {
@@ -73,12 +83,11 @@ const Home = () => {
     }
   }, [response]);
 
-  // console.log(process.env.NODE_ENV);
-
   return (
     <>
       <HomeDiv>
         <Landing />
+        <TypeSelect setLangType={setLangType} />
         <Chat ref={scrollRef}>
           <TodayDate>
             <div>
@@ -89,7 +98,6 @@ const Home = () => {
           </TodayDate>
 
           <ChatMessage chatHistory={chatHistory} loading={loading} />
-          {/* <button onClick={test}>test</button> */}
         </Chat>
 
         <InputFooter
@@ -97,6 +105,7 @@ const Home = () => {
           inputValue={inputValue}
           onInputChange={onInputChange}
           loading={loading}
+          langType={langType}
         />
       </HomeDiv>
     </>
