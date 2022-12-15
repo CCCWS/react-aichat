@@ -76,7 +76,7 @@ const MessageContent = styled.div<{ type: string }>`
 
     line-height: 30px;
     word-wrap: break-word;
-    white-space: pre-wrap;
+    /* white-space: pre-wrap; */
   }
 `;
 
