@@ -84,31 +84,29 @@ const Home = () => {
   }, [response]);
 
   return (
-    <>
-      <HomeDiv>
-        <Landing />
-        <TypeSelect setLangType={setLangType} />
-        <Chat ref={scrollRef}>
-          <TodayDate>
-            <div>
-              {new Intl.DateTimeFormat("ko", { dateStyle: "long" }).format(
-                new Date()
-              )}
-            </div>
-          </TodayDate>
+    <HomeDiv>
+      <Landing />
+      <TypeSelect setLangType={setLangType} />
+      <Chat ref={scrollRef}>
+        <TodayDate>
+          <div>
+            {new Intl.DateTimeFormat("ko", { dateStyle: "long" }).format(
+              new Date()
+            )}
+          </div>
+        </TodayDate>
 
-          <ChatMessage chatHistory={chatHistory} loading={loading} />
-        </Chat>
+        <ChatMessage chatHistory={chatHistory} loading={loading} />
+      </Chat>
 
-        <InputFooter
-          onSendMessage={onSendMessage}
-          inputValue={inputValue}
-          onInputChange={onInputChange}
-          loading={loading}
-          langType={langType}
-        />
-      </HomeDiv>
-    </>
+      <InputFooter
+        onSendMessage={onSendMessage}
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+        loading={loading}
+        langType={langType}
+      />
+    </HomeDiv>
   );
 };
 

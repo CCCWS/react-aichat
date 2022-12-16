@@ -3,6 +3,7 @@ import scrollbar from "smooth-scrollbar";
 
 import GlobalStyle from "./Components/Style/GlobalStyle";
 import Home from "./Page/Home";
+import Test from "./Page/Test";
 
 function App() {
   // useEffect(() => {
@@ -13,7 +14,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Home />
+      <Test />
     </>
   );
 }
