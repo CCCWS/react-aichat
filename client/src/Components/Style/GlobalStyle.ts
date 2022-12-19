@@ -41,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family : BMJUA;
     font-size: 1rem;
+    overscroll-behavior: contain;
 }
 
 ::-webkit-scrollbar {

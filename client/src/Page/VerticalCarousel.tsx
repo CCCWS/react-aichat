@@ -27,14 +27,35 @@ const VerticalCarousel = ({ children }: Props) => {
       onNext();
     }
   };
-  return (
-    <Div onWheel={onWheelEvent} location={location}>
-      <div>{children}</div>
 
-      <Button>
-        <button onClick={onPrev}>{`<`}</button>
-        <button onClick={onNext}>{`>`}</button>
-      </Button>
+  let startClientY = 0;
+  const onDownEvent = (e: any) => {
+    startClientY = e.changedTouches[0].clientY;
+  };
+
+  const onUpEvent = (e: any) => {
+    let endClientY = 0;
+
+    endClientY = e.changedTouches[0].clientY;
+
+    let moveY = startClientY - endClientY;
+    if (moveY >= 100) {
+      onNext();
+    }
+
+    if (moveY <= -100) {
+      onPrev();
+    }
+  };
+
+  return (
+    <Div
+      onTouchStart={onDownEvent}
+      onTouchEnd={onUpEvent}
+      onWheel={onWheelEvent}
+      location={location}
+    >
+      <div>{children}</div>
 
       <PointBox>
         {children.map((data, index) => (
@@ -54,7 +75,6 @@ const Div = styled.div<{ location: number }>`
   height: 100vh;
   display: flex;
   overflow: hidden;
-
   position: relative;
 
   & > :first-child {
@@ -63,13 +83,6 @@ const Div = styled.div<{ location: number }>`
     transition: all cubic-bezier(0.22, 0.61, 0.36, 1) 0.8s;
     transform: ${(props) => `translateY(-${props.location}00%)`};
   }
-`;
-
-const Button = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: black;
 `;
 
 const PointBox = styled.div`
