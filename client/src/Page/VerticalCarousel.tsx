@@ -1,24 +1,39 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+//overscroll-behavior: contain;
+//스마트폰 사용시 아래로 스와이프하여 새로고침 방지
+
 interface Props {
   children: React.ReactNode[];
+  point?: boolean;
+  delay: number;
 }
 
-const VerticalCarousel = ({ children }: Props) => {
+const VerticalCarousel = ({ children, point, delay }: Props) => {
+  //현재 위치
   const [location, setLocation] = useState<number>(0);
 
+  //이전
   const onPrev = () => {
     if (location === 0) return;
     setLocation((prev) => prev - 1);
   };
 
+  //다음
   const onNext = () => {
     if (location === children.length - 1) return;
     setLocation((prev) => prev + 1);
   };
 
+  //스크롤 가능여부 확인
+  const [onScroll, setOnScroll] = useState<boolean>(true);
+
+  //마우스휠 이벤트
   const onWheelEvent = (e: React.WheelEvent) => {
+    if (!onScroll) return;
+
+    setOnScroll(false);
     if (e.deltaY < 0) {
       onPrev();
     }
@@ -26,24 +41,29 @@ const VerticalCarousel = ({ children }: Props) => {
     if (e.deltaY > 0) {
       onNext();
     }
+
+    setTimeout(() => {
+      setOnScroll(true);
+    }, delay);
   };
 
-  let startClientY = 0;
-  const onDownEvent = (e: any) => {
+  //터치 이벤트
+  let startClientY: number = 0;
+  const onDownEvent = (e: React.TouchEvent) => {
     startClientY = e.changedTouches[0].clientY;
   };
 
-  const onUpEvent = (e: any) => {
+  const onUpEvent = (e: React.TouchEvent) => {
     let endClientY = 0;
 
     endClientY = e.changedTouches[0].clientY;
 
     let moveY = startClientY - endClientY;
-    if (moveY >= 100) {
+    if (moveY >= 120) {
       onNext();
     }
 
-    if (moveY <= -100) {
+    if (moveY <= -120) {
       onPrev();
     }
   };
@@ -55,17 +75,23 @@ const VerticalCarousel = ({ children }: Props) => {
       onWheel={onWheelEvent}
       location={location}
     >
-      <div>{children}</div>
-
-      <PointBox>
-        {children.map((data, index) => (
-          <Point
-            key={index}
-            location={location === index && true}
-            onClick={() => setLocation(index)}
-          />
+      <div>
+        {children.map((children, index) => (
+          <Page key={index}>{children}</Page>
         ))}
-      </PointBox>
+      </div>
+
+      {point && (
+        <PointBox>
+          {children.map((data, index) => (
+            <Point
+              key={index}
+              location={location === index && true}
+              onClick={() => setLocation(index)}
+            />
+          ))}
+        </PointBox>
+      )}
     </Div>
   );
 };
@@ -74,6 +100,7 @@ const Div = styled.div<{ location: number }>`
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   overflow: hidden;
   position: relative;
 
@@ -85,9 +112,13 @@ const Div = styled.div<{ location: number }>`
   }
 `;
 
+const Page = styled.div`
+  width: inherit;
+  height: inherit;
+`;
+
 const PointBox = styled.div`
   width: 30px;
-  height: 150px;
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);
@@ -105,6 +136,7 @@ const Point = styled.div<{ location: boolean }>`
   border-radius: 30px;
   width: 10px;
   height: 10px;
+  margin: 10px;
 
   cursor: pointer;
 `;

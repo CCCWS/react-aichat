@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import scrollbar from "smooth-scrollbar";
 import App from "./App";
 
 const root = ReactDOM.createRoot(

@@ -4,17 +4,38 @@ import VerticalCarousel from "./VerticalCarousel";
 
 const Test2 = () => {
   return (
-    <>
-      <VerticalCarousel>
-        <Div1 />
-        <Div2 />
-        <Div3 />
-        <Div4 />
-        <Div5 />
-      </VerticalCarousel>
-    </>
+    <VerticalCarousel delay={1000} point={true}>
+      <div>
+        <Test>페이지 1</Test>
+      </div>
+
+      <div></div>
+    </VerticalCarousel>
   );
 };
+
+const Test = styled.div`
+  padding: 10px;
+  width: 100%;
+  height: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 50px;
+`;
+
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 50px;
+`;
 
 const Div1 = styled.div`
   width: 100%;
