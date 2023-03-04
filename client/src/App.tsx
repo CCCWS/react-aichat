@@ -6,7 +6,8 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Home />
+      {/* <Home /> */}
+      <Test2 />
     </>
   );
 }

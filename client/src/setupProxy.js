@@ -7,4 +7,14 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
+  app.use(
+    createProxyMiddleware("/naver", {
+      target: "https://openapi.naver.com",
+      pathRewrite: {
+        "^/naver": "",
+      },
+      changeOrigin: true,
+    })
+  );
 };
