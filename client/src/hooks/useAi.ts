@@ -3,17 +3,16 @@ import { Configuration, OpenAIApi } from "openai";
 
 import useTranslate from "./useTranslate";
 
-import { Ai_ApiKey } from "../ApiKey";
+// import { Ai_ApiKey } from "../ApiKey";
 
 const useAi = () => {
   const [response, setResponse] = useState<string>("");
-
   const { result: enToKr, papagoApi: enTranslate } = useTranslate();
 
   const onSendMessageAi = useCallback(
     (value: string, langType: "ko" | "en") => {
       const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: process.env.REACT_APP_AI_KEY,
       });
 
       const openai = new OpenAIApi(configuration);

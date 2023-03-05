@@ -35,8 +35,8 @@ const useTranslate = () => {
       const config = {
         headers: {
           "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "x-naver-client-id": Papago_client_id,
-          "x-naver-client-secret": Papago_client_secret,
+          "x-naver-client-id": process.env.REACT_APP_PAPAGO_CLIENT_ID,
+          "x-naver-client-secret": process.env.REACT_APP_PAPAGO_CLIENT_SECRET,
         },
       };
 
