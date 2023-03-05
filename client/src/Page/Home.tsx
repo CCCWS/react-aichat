@@ -23,7 +23,7 @@ const Home = () => {
   const [langType, setLangType] = useState<"ko" | "en">("ko");
   const scrollRef = useRef<any>();
 
-  const { result: krToEn, papagoApi: krTranslate } = useTranslate();
+  const { result: krToEn, papagoApi } = useTranslate();
 
   const { response, onSendMessageAi } = useAi();
 
@@ -54,7 +54,7 @@ const Home = () => {
 
     //한국어 사용시 번역
     if (langType === "ko") {
-      krTranslate("ko", "en", inputValue);
+      papagoApi("ko", "en", inputValue);
     }
 
     //영어 사용시 번역을 하지않고 바로 문장 전달

@@ -9,10 +9,10 @@ module.exports = function (app) {
   );
 
   app.use(
-    createProxyMiddleware("/naver", {
+    createProxyMiddleware("/papago", {
       target: "https://openapi.naver.com",
       pathRewrite: {
-        "^/naver": "",
+        "^/papago": "",
       },
       changeOrigin: true,
     })
