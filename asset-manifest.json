@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/ai-chat/static/css/main.dabfebd0.css",
+    "main.js": "/ai-chat/static/js/main.914597e3.js",
+    "static/media/image1.png": "/ai-chat/static/media/image1.b70d03b23aebc3165f91.png",
+    "index.html": "/ai-chat/index.html",
+    "main.dabfebd0.css.map": "/ai-chat/static/css/main.dabfebd0.css.map",
+    "main.914597e3.js.map": "/ai-chat/static/js/main.914597e3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dabfebd0.css",
+    "static/js/main.914597e3.js"
+  ]
+}
