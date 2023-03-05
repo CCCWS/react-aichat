@@ -13,7 +13,7 @@ const useAi = () => {
   const onSendMessageAi = useCallback(
     (value: string, langType: "ko" | "en") => {
       const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: "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",
       });
 
       const openai = new OpenAIApi(configuration);
