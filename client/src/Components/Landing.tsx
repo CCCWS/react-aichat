@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import image1 from "../image/image1.png";
-
 const Landing = () => {
   const [view, setView] = useState(true);
   useEffect(() => {
@@ -13,7 +11,7 @@ const Landing = () => {
 
   return (
     <Div view={view}>
-      <DivImg image={`url(${image1})`}></DivImg>
+      <DivImg image={process.env.PUBLIC_URL + "/image/image1.png"}></DivImg>
     </Div>
   );
 };
@@ -40,7 +38,7 @@ const DivImg = styled.div<{ image: string }>`
 
   border-radius: 100px;
 
-  background-image: ${(props) => props.image};
+  background-image: ${(props) => `url(${props.image})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

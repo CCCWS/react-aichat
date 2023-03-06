@@ -1,7 +1,5 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
-
-import { Papago_client_id, Papago_client_secret } from "../ApiKey";
 
 const useTranslate = () => {
   const [result, setResult] = useState<string>("");
@@ -23,7 +21,13 @@ const useTranslate = () => {
 
   // client만 사용시
   const papagoApi = useCallback(
-    async (source: "ko" | "en", target: "ko" | "en", value: string) => {
+    async (
+      source: "ko" | "en",
+      target: "ko" | "en",
+      value: string,
+      PAPAGO_CLIENT_ID: string,
+      PAPAGO_CLIENT_SECRET: string
+    ) => {
       const api_url = "/v1/papago/n2mt";
 
       const options = {
@@ -35,8 +39,8 @@ const useTranslate = () => {
       const config = {
         headers: {
           "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "x-naver-client-id": process.env.REACT_APP_PAPAGO_CLIENT_ID,
-          "x-naver-client-secret": process.env.REACT_APP_PAPAGO_CLIENT_SECRET,
+          "x-naver-client-id": PAPAGO_CLIENT_ID,
+          "x-naver-client-secret": PAPAGO_CLIENT_SECRET,
         },
       };
 

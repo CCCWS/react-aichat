@@ -9,9 +9,9 @@ export const Papago_client_secret: string = "E_eU2E8D34";
 const Test2 = () => {
   const { papagoApi } = useTranslate();
 
-  useEffect(() => {
-    papagoApi("ko", "en", "오늘 날씨");
-  }, []);
+  // useEffect(() => {
+  //   papagoApi("ko", "en", "오늘 날씨");
+  // }, []);
 
   return (
     <div>

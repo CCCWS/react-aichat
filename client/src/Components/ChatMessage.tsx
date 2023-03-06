@@ -3,8 +3,6 @@ import styled from "styled-components";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import CSSTransition from "react-transition-group/CSSTransition";
 
-import image1 from "../image/image1.png";
-
 interface ChatMessageProps {
   chatHistory: { message: string; type: string }[];
   loading: boolean;
@@ -30,7 +28,9 @@ const ChatMessage = ({ chatHistory, loading }: ChatMessageProps) => {
                     <div>{data.message}</div>
                   </MessageContent>
                   {data.type === "response" && (
-                    <Image image={`url(${image1})`} />
+                    <Image
+                      image={process.env.PUBLIC_URL + "/image/image1.png"}
+                    />
                   )}
                 </Message>
               </CSSTransition>
@@ -87,7 +87,7 @@ const Image = styled.div<{ image: string }>`
   border-radius: 30px;
   margin-right: 10px;
 
-  background-image: ${(props) => props.image};
+  background-image: ${(props) => `url(${props.image})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -3,16 +3,20 @@ import { Configuration, OpenAIApi } from "openai";
 
 import useTranslate from "./useTranslate";
 
-// import { Ai_ApiKey } from "../ApiKey";
+interface Api_Keys {
+  AI_KEY: string;
+  PAPAGO_CLIENT_ID: string;
+  PAPAGO_CLIENT_SECRET: string;
+}
 
 const useAi = () => {
   const [response, setResponse] = useState<string>("");
   const { result: enToKr, papagoApi: enTranslate } = useTranslate();
 
   const onSendMessageAi = useCallback(
-    (value: string, langType: "ko" | "en") => {
+    (value: string, langType: "ko" | "en", apiKeys: Api_Keys) => {
       const configuration = new Configuration({
-        apiKey: process.env.REACT_APP_AI_KEY,
+        apiKey: apiKeys.AI_KEY,
       });
 
       const openai = new OpenAIApi(configuration);
@@ -29,7 +33,13 @@ const useAi = () => {
         })
         .then((res: any) => {
           if (langType === "ko") {
-            enTranslate("en", "ko", res.data.choices[0].text);
+            enTranslate(
+              "en",
+              "ko",
+              res.data.choices[0].text,
+              apiKeys.PAPAGO_CLIENT_ID,
+              apiKeys.PAPAGO_CLIENT_SECRET
+            );
           }
 
           if (langType === "en") {
