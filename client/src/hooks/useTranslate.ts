@@ -4,9 +4,6 @@ import axios from "axios";
 const useTranslate = () => {
   const [result, setResult] = useState<string>("");
 
-  const proxy =
-    window.location.hostname === "localhost" ? "/papago" : "/papago_proxy";
-
   // server 사용시
   // const papagoApi = useCallback(
   //   async (source: "ko" | "en", target: "ko" | "en", value: string) => {
@@ -31,6 +28,10 @@ const useTranslate = () => {
       PAPAGO_CLIENT_ID: string,
       PAPAGO_CLIENT_SECRET: string
     ) => {
+      const proxy =
+        window.location.hostname === "localhost" ? "/papago" : "/papago_proxy";
+
+      console.log(proxy);
       const api_url = "/v1/papago/n2mt";
 
       const options = {
