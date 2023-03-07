@@ -4,6 +4,9 @@ import axios from "axios";
 const useTranslate = () => {
   const [result, setResult] = useState<string>("");
 
+  const proxy =
+    window.location.hostname === "localhost" ? "/papago" : "/papago_proxy";
+
   // server 사용시
   // const papagoApi = useCallback(
   //   async (source: "ko" | "en", target: "ko" | "en", value: string) => {
@@ -37,7 +40,7 @@ const useTranslate = () => {
       };
 
       const config = {
-        baseURL: "/papago",
+        baseURL: proxy,
         headers: {
           "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
           "x-naver-client-id": PAPAGO_CLIENT_ID,
