@@ -37,6 +37,7 @@ const useTranslate = () => {
       };
 
       const config = {
+        baseURL: "/papago",
         headers: {
           "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
           "x-naver-client-id": PAPAGO_CLIENT_ID,
@@ -44,7 +45,8 @@ const useTranslate = () => {
         },
       };
 
-      const res = await axios.post(`papago${api_url}`, options, config);
+      const res = await axios.post(api_url, options, config);
+      console.log(res);
       setResult(res.data.message.result.translatedText);
     },
     []

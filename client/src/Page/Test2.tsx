@@ -3,15 +3,40 @@ import styled from "styled-components";
 import axios from "axios";
 import useTranslate from "../hooks/useTranslate";
 
-export const Papago_client_id: string = "_lXQAvuTjq_l0PT8yBcA";
-export const Papago_client_secret: string = "E_eU2E8D34";
+export const Papago_client_id: string = "i296IGpXCZATeW6zzHlD";
+export const Papago_client_secret: string = "kq7OwoeNtE";
 
 const Test2 = () => {
-  const { papagoApi } = useTranslate();
+  useEffect(() => {
+    const papagoApi = async (
+      source: "ko" | "en",
+      target: "ko" | "en",
+      value: string
+    ) => {
+      const api_url = "/v1/papago/n2mt";
 
-  // useEffect(() => {
-  //   papagoApi("ko", "en", "오늘 날씨");
-  // }, []);
+      const options = {
+        source: source,
+        target: target,
+        text: value,
+      };
+
+      const config = {
+        baseURL:
+          "https://cors-anywhere.herokuapp.com/https://openapi.naver.com",
+        headers: {
+          "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "x-naver-client-id": Papago_client_id,
+          "x-naver-client-secret": Papago_client_secret,
+        },
+      };
+
+      const res = await axios.post(api_url, options, config);
+      console.log(res);
+    };
+
+    papagoApi("ko", "en", "테스트");
+  }, []);
 
   return (
     <div>
