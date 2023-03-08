@@ -36,7 +36,11 @@ const ChatMessage = ({ chatHistory, loading }: ChatMessageProps) => {
               </CSSTransition>
             ))}
           </TransitionGroup>
-          <Waiting loadingProps={loading}>...</Waiting>
+          <Waiting loadingProps={loading}>
+            <div />
+            <div />
+            <div />
+          </Waiting>
         </>
       )}
     </>
@@ -62,7 +66,7 @@ const MessageTime = styled.div`
 `;
 
 const MessageContent = styled.div<{ type: string }>`
-  max-width: 60%;
+  max-width: 70%;
   & > :last-child {
     margin-top: 10px;
     background-color: ${(props) => props.type === "send" && " #bdbdbdad"};
@@ -75,8 +79,9 @@ const MessageContent = styled.div<{ type: string }>`
     border-radius: 10px;
 
     line-height: 30px;
+
     word-wrap: break-word;
-    /* white-space: pre-wrap; */
+    white-space: pre-wrap;
   }
 `;
 
@@ -94,17 +99,59 @@ const Image = styled.div<{ image: string }>`
 `;
 
 const Waiting = styled.div<{ loadingProps: boolean }>`
+  width: 70px;
+  height: 40px;
+
   margin: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 10px;
   border-radius: 10px;
 
   background-color: #ffffffac;
-  display: inline;
+  display: ${(props) => (props.loadingProps ? "flex" : "none")};
+  justify-content: space-evenly;
+  align-items: flex-end;
 
-  display: ${(props) => !props.loadingProps && "none"};
+  div {
+    width: 7px;
+    height: 7px;
+    background-color: gray;
+    border-radius: 10px;
+
+    animation-name: loading;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  & > :first-child {
+    animation-delay: 0s;
+  }
+
+  & > :nth-child(2) {
+    animation-delay: 0.3s;
+  }
+
+  & > :nth-child(3) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translateY(0px);
+    }
+
+    25% {
+      transform: translateY(-10px);
+    }
+
+    50% {
+      transform: translateY(0px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
 `;
 
 export default React.memo(ChatMessage);
