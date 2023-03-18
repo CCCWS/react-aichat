@@ -38,15 +38,16 @@ const Test2 = () => {
   //   papagoApi("ko", "en", "테스트");
   // }, []);
 
-  return (
-    <Test>
-      <Div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </Div>
-    </Test>
-  );
+  useEffect(() => {
+    const get = async () => {
+      const res = await axios.get("/test");
+      console.log(res.data);
+    };
+
+    get();
+  }, []);
+
+  return <Test></Test>;
 };
 
 const Test = styled.div`
