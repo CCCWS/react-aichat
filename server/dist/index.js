@@ -5,14 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const papago_1 = __importDefault(require("./papago"));
-const test_1 = __importDefault(require("./test"));
 const app = (0, express_1.default)();
 const port = 3001;
 app.use(express_1.default.json());
 app.use("/api/papago", papago_1.default);
-app.use("/api/test", test_1.default);
 app.get("/", (req, res) => {
-    res.send("Hello, Express");
+    res.send(`Listening on port ${port}`);
 });
 // app.use(express.static(path.join(__dirname, "../client/build")));
 // app.get("*", (req, res) => {

@@ -4,10 +4,12 @@ import axios from "axios";
 const useTranslate = () => {
   const [result, setResult] = useState<string>("");
 
+  const url = process.env.NODE_ENV === "development" ? "" : "/cloudtypeServer";
+
   // server 사용시
   const papagoApi = useCallback(
     async (source: "ko" | "en", target: "ko" | "en", text: string) => {
-      const res = await axios.post("/api/papago/translate", {
+      const res = await axios.post(`${url}/api/papago/translate`, {
         source: source,
         target: target,
         text: text,
