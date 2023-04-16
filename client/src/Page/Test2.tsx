@@ -9,15 +9,13 @@ export const Papago_client_secret: string = "aPongTDG2G";
 const Test2 = () => {
   useEffect(() => {
     const api = async () => {
-      const res = await axios.get(
-        "https://port-0-react-aichat-1maxx2algj8mzv5.sel3.cloudtype.app/papago/translate"
-      );
+      const res = await axios.get("api/test/test");
       console.log(res);
     };
 
     api();
   }, []);
-  return <></>;
+  return <div>test</div>;
 };
 
 export default Test2;
