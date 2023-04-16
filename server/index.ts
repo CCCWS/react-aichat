@@ -10,10 +10,13 @@ app.use(express.json());
 app.use("/api/papago", papago);
 app.use("/api/test", test);
 
-// app.use(express.static(path.join(__dirname, "../../client/build")));
+app.get("*", (req, res) => {
+  res.send("Hello, Express");
+});
 
+// app.use(express.static(path.join(__dirname, "../client/build")));
 // app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "../../client", "build", "index.html"));
+//   res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
 // });
 
 app.listen(port, () => {
