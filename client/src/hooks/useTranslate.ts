@@ -6,7 +6,7 @@ const useTranslate = () => {
 
   const url = process.env.NODE_ENV === "production" ? "/cloudtypeServer" : "";
 
-  console.log(url);
+  console.log(process.env.NODE_ENV);
 
   // server 사용시
   const papagoApi = useCallback(
