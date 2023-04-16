@@ -4,7 +4,9 @@ import axios from "axios";
 const useTranslate = () => {
   const [result, setResult] = useState<string>("");
 
-  const url = process.env.NODE_ENV === "development" ? "" : "/cloudtypeServer";
+  const url = process.env.NODE_ENV === "production" ? "/cloudtypeServer" : "";
+
+  console.log(url);
 
   // server 사용시
   const papagoApi = useCallback(
@@ -16,7 +18,7 @@ const useTranslate = () => {
       });
       setResult(res.data.message.result.translatedText);
     },
-    []
+    [url]
   );
 
   // client만 사용시

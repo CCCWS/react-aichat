@@ -10,7 +10,9 @@ const Test2 = () => {
   const { result, papagoApi } = useTranslate();
 
   useEffect(() => {
-    const api = async () => {};
+    const api = async () => {
+      papagoApi("ko", "en", "테스트");
+    };
 
     api();
   }, [papagoApi]);
