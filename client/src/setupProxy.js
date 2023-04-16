@@ -10,7 +10,7 @@ module.exports = function (app) {
 
   app.use(
     createProxyMiddleware("/papago", {
-      target: "https://openapi.naver.com",
+      target: "https://openapi.naver.com/",
       pathRewrite: {
         "^/papago": "",
       },
@@ -24,6 +24,16 @@ module.exports = function (app) {
         "http://ec2-3-36-113-26.ap-northeast-2.compute.amazonaws.com:8000/",
       pathRewrite: {
         "^/test": "",
+      },
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    createProxyMiddleware("/naver", {
+      target: "https://m.search.naver.com",
+      pathRewrite: {
+        "^/naver": "",
       },
       changeOrigin: true,
     })

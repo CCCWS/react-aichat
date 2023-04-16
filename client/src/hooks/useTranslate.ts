@@ -44,8 +44,8 @@ const useTranslate = () => {
         baseURL: proxy,
         headers: {
           "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "x-naver-client-id": PAPAGO_CLIENT_ID,
-          "x-naver-client-secret": PAPAGO_CLIENT_SECRET,
+          "x-naver-client-id": "fLDASiHmR9DJZme9ougX",
+          "x-naver-client-secret": "tTAqQvAT_2",
         },
       };
 
