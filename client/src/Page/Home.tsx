@@ -79,13 +79,7 @@ const Home = () => {
 
     //한국어 사용시 번역
     if (langType === "ko") {
-      papagoApi(
-        "ko",
-        "en",
-        inputValue,
-        apiKeys.PAPAGO_CLIENT_ID,
-        apiKeys.PAPAGO_CLIENT_SECRET
-      );
+      papagoApi("ko", "en", inputValue);
     }
 
     //영어 사용시 번역을 하지않고 바로 문장 전달

@@ -1,20 +1,23 @@
 import express, { Request, Response, Router } from "express";
 import request from "request";
+import dotenv from "dotenv";
 
 const router: Router = express.Router();
+
+dotenv.config();
 
 router.post("/translate", function (req: Request, res: Response) {
   var api_url = "https://openapi.naver.com/v1/papago/n2mt";
   const options = {
     url: api_url,
     form: {
-      source: "ko",
-      target: "en",
-      text: "테스트",
+      source: req.body.source,
+      target: req.body.target,
+      text: req.body.text,
     },
     headers: {
-      "X-Naver-Client-Id": "jg9yEhUy3c9YvueE5AFa",
-      "X-Naver-Client-Secret": "irC78M2ete",
+      "X-Naver-Client-Id": process.env.PAPAGO_CLIENT_ID,
+      "X-Naver-Client-Secret": process.env.PAPAGO_CLIENT_SECRET,
     },
   };
   request.post(options, function (error: any, response: any, body: any) {

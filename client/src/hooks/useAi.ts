@@ -33,13 +33,7 @@ const useAi = () => {
         })
         .then((res: any) => {
           if (langType === "ko") {
-            enTranslate(
-              "en",
-              "ko",
-              res.data.choices[0].text,
-              apiKeys.PAPAGO_CLIENT_ID,
-              apiKeys.PAPAGO_CLIENT_SECRET
-            );
+            enTranslate("en", "ko", res.data.choices[0].text);
           }
 
           if (langType === "en") {

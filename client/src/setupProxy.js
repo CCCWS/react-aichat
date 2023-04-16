@@ -9,6 +9,16 @@ module.exports = function (app) {
   );
 
   app.use(
+    createProxyMiddleware("/getServer", {
+      target: "https://port-0-react-aichat-1maxx2algj8mzv5.sel3.cloudtype.app/",
+      pathRewrite: {
+        "^/getServer": "",
+      },
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
     createProxyMiddleware("/papago", {
       target: "https://openapi.naver.com/",
       pathRewrite: {

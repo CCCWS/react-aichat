@@ -5,19 +5,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const request_1 = __importDefault(require("request"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const router = express_1.default.Router();
+dotenv_1.default.config();
 router.post("/translate", function (req, res) {
     var api_url = "https://openapi.naver.com/v1/papago/n2mt";
     const options = {
         url: api_url,
         form: {
-            source: "ko",
-            target: "en",
-            text: "테스트",
+            source: req.body.source,
+            target: req.body.target,
+            text: req.body.text,
         },
         headers: {
-            "X-Naver-Client-Id": "jg9yEhUy3c9YvueE5AFa",
-            "X-Naver-Client-Secret": "irC78M2ete",
+            "X-Naver-Client-Id": process.env.PAPAGO_CLIENT_ID,
+            "X-Naver-Client-Secret": process.env.PAPAGO_CLIENT_SECRET,
         },
     };
     request_1.default.post(options, function (error, response, body) {
