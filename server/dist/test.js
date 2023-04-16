@@ -7,6 +7,9 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 router.get("/test", (req, res) => {
     console.log("test");
-    return res.status(200).json({ success: true });
+    return res.status(200).json("test??");
+});
+router.get("/ttest", (req, res) => {
+    res.send("Hello, Express");
 });
 exports.default = router;
