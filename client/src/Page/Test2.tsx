@@ -10,7 +10,7 @@ const Test2 = () => {
   useEffect(() => {
     const api = async () => {
       const res = await axios.get(
-        "https://port-0-react-aichat-1maxx2algiuwezz.sel3.cloudtype.app/test/test"
+        "https://port-0-react-aichat-1maxx2algj8mzv5.sel3.cloudtype.app/papago/translate"
       );
       console.log(res);
     };
