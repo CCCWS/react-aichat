@@ -27,4 +27,14 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
+  app.use(
+    createProxyMiddleware("/test", {
+      target: "http://3.39.233.166:3000/",
+      pathRewrite: {
+        "^/test": "",
+      },
+      changeOrigin: true,
+    })
+  );
 };
