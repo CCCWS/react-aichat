@@ -11,10 +11,27 @@ const Test2 = () => {
       console.log(res.data);
     };
 
-    api();
+    // api();
   }, []);
 
-  return <div></div>;
+  return (
+    <Div
+      url={
+        ""
+      }
+    >
+      test
+    </Div>
+  );
 };
+
+const Div = styled.div<{ url: string }>`
+  width: 500px;
+  height: 500px;
+
+  background-image: ${(props) => `url(${props.url})`};
+  background-position: center;
+  background-size: cover;
+`;
 
 export default Test2;
