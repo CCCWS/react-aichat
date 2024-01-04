@@ -9,7 +9,6 @@ interface Api_Keys {
   PAPAGO_CLIENT_SECRET: string;
 }
 
-
 const useAi = () => {
   const [response, setResponse] = useState<string>("");
   const { result: enToKr, papagoApi: enTranslate } = useTranslate();
