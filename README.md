@@ -18,7 +18,7 @@
 
 
 ## 주소
-* <https://singular-trifle-93bd7b.netlify.app//>
+* <https://singular-trifle-93bd7b.netlify.app/>
 
 ## 사용된 라이브러리
 * 공통
